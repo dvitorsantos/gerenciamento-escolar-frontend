@@ -1,20 +1,26 @@
 import type { NextPage } from "next";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
-import axios from "axios";
+import { useContext } from "react";
+import { AuthContext } from "../contexts/AuthContext";
 
 const Login: NextPage = () => {
   const { register, handleSubmit } = useForm();
+  const { signIn } = useContext(AuthContext)
+
+  // async function handleSignIn(data: object) {
+  //   await axios
+  //     .post("http://localhost:8080/usuarios/auth", data)
+  //     .then(function (response) {
+  //       console.log(response);
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
+  // }
+
 
   async function handleSignIn(data: object) {
-    await axios
-      .post("http://localhost:8080/usuarios/auth", data)
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    await signIn(data)
   }
 
   return (
