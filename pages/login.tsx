@@ -7,18 +7,6 @@ const Login: NextPage = () => {
   const { register, handleSubmit } = useForm();
   const { signIn } = useContext(AuthContext)
 
-  // async function handleSignIn(data: object) {
-  //   await axios
-  //     .post("http://localhost:8080/usuarios/auth", data)
-  //     .then(function (response) {
-  //       console.log(response);
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-  //     });
-  // }
-
-
   async function handleSignIn(data: object) {
     await signIn(data)
   }

@@ -1,18 +1,14 @@
 import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
+import { useContext, useEffect } from 'react'
+import { AuthContext } from '../contexts/AuthContext'
 import styles from '../styles/Home.module.css'
 
 const Home: NextPage = () => {
+  const { usuario } = useContext(AuthContext);
+
   return (
     <div className={styles.container}>
-      <h1 className="text-3xl font-bold underline">Teste</h1>
-      <button className="btn btn-blue">
-        Button
-      </button>
-      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-        Button
-      </button>
+      <h1 className="text-3xl font-bold underline">Bem vindo {usuario?.login}</h1>
     </div>
   )
 }
