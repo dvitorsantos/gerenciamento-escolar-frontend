@@ -2,6 +2,7 @@ import { Component, createContext, useEffect, useState } from "react";
 import { parseCookies, setCookie } from "nookies";
 import axios from "axios";
 import Router from "next/router";
+import { getApi } from "../services/axios";
 
 type Usuario = {
   id: BigInteger;
@@ -24,25 +25,21 @@ export const AuthContext = createContext({} as AuthContextType);
 
 export function AuthProvider({ children }) {
   const [usuario, setUsuario] = useState<Usuario | null>(null);
-
   const isAuthenticated = !!usuario;
+  const api = getApi();
 
   useEffect(() => {
     const fetchUsuarios = async () => {
       const { "nextauth.token": token } = parseCookies();
 
       if (token) {
-        await axios
-          .get(
-            `http://localhost:8080/usuarios/${token}`, 
-            { headers: {"Authorization" : `Bearer ${token}`} })
-          .then(function (response) {
-            setUsuario({
-              id: response.data.id,
-              login: response.data.login,
-              email: response.data.email,
-            })
+        await api.get(`/usuarios/${token}`).then(function (response) {
+          setUsuario({
+            id: response.data.id,
+            login: response.data.login,
+            email: response.data.email,
           });
+        });
       }
     };
 
@@ -50,8 +47,8 @@ export function AuthProvider({ children }) {
   }, []);
 
   async function signIn({ login, senha }: SignInData) {
-    await axios
-      .post("http://localhost:8080/usuarios/auth", {
+    await api
+      .post("/usuarios/auth", {
         login,
         senha,
       })
@@ -65,7 +62,7 @@ export function AuthProvider({ children }) {
         Router.push("/");
       })
       .catch(function (error) {
-        console.log(error);
+        throw error;
       });
   }
 

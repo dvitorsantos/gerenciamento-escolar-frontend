@@ -1,14 +1,23 @@
 import type { NextPage } from "next";
 import { useForm } from "react-hook-form";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../contexts/AuthContext";
+import Error from "../components/error";
+import HomePage from "../components/test";
 
 const Login: NextPage = () => {
   const { register, handleSubmit } = useForm();
-  const { signIn } = useContext(AuthContext)
+  const { signIn } = useContext(AuthContext);
+  const [error, setError] = useState(null);
+  const [errorVisible, setErrorVisible] = useState(false);
 
   async function handleSignIn(data: object) {
-    await signIn(data)
+    try {
+      await signIn(data);
+    } catch (error) {
+      setError(error.response.data);
+      setErrorVisible(true);
+    }
   }
 
   return (
@@ -36,6 +45,13 @@ const Login: NextPage = () => {
                 type="password"
                 placeholder="Senha"
               />
+              {error ? (
+                <Error
+                  titulo="Erro ao autenticar!"
+                  mensagem={error.message}
+                  visible={errorVisible}
+                />
+              ) : null}
               <div className="flex justify-between w-full">
                 <div className="flex">
                   <input type="checkbox" name="" id="" />
