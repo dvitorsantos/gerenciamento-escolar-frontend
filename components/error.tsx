@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 
 function Error(props: any) {
-  const [visible, setVisible] = useState(props.visible);
+  const handleVisible = useCallback(event => {
+    props.setErrorVisible(event.target.value)
+  }, [props.setErrorVisible])
 
-  if (visible) {
+  if (props.visible) {
     return (
       <div
         className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative w-full"
@@ -11,7 +13,7 @@ function Error(props: any) {
       >
         <strong className="font-bold">{props.titulo} </strong>
         <span className="block sm:inline">{props.mensagem}</span>
-        <span className="absolute top-0 bottom-0 right-0 px-4 py-3" onClick={() => setVisible(false)}>
+        <span className="absolute top-0 bottom-0 right-0 px-4 py-3" onClick={() => props.setErrorVisible(false)}>
           <svg
             className="fill-current h-6 w-6 text-red-500"
             role="button"

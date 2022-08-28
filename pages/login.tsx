@@ -2,8 +2,11 @@ import type { NextPage } from "next";
 import { useForm } from "react-hook-form";
 import { useContext, useState } from "react";
 import { AuthContext } from "../contexts/AuthContext";
+import Image from "next/image";
+
+import loginBanner from "../images/loginBanner.svg";
+
 import Error from "../components/error";
-import HomePage from "../components/test";
 
 const Login: NextPage = () => {
   const { register, handleSubmit } = useForm();
@@ -14,7 +17,7 @@ const Login: NextPage = () => {
   async function handleSignIn(data: object) {
     try {
       await signIn(data);
-    } catch (error) {
+    } catch (error: any) {
       setError(error.response.data);
       setErrorVisible(true);
     }
@@ -25,7 +28,9 @@ const Login: NextPage = () => {
       <form onSubmit={handleSubmit(handleSignIn)}>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
           <div className="h-screen">
-            <div className="w-full h-full rounded-r-[20px] bg-[#0119F5]"></div>
+            <div className="w-full h-full rounded-r-[20px] bg-[#0119F5] bg-opacity-10 flex justify-center items-center">
+              <Image src={loginBanner} />
+            </div>
           </div>
           <div className="h-screen flex flex-col space-y-4 items-center justify-center mr-4">
             <div className="flex flex-col space-y-4 items-center justify-center w-4/5">
@@ -45,13 +50,12 @@ const Login: NextPage = () => {
                 type="password"
                 placeholder="Senha"
               />
-              {error ? (
-                <Error
-                  titulo="Erro ao autenticar!"
-                  mensagem={error.message}
-                  visible={errorVisible}
-                />
-              ) : null}
+              <Error
+                titulo="Erro ao autenticar!"
+                mensagem={error?.message}
+                visible={errorVisible}
+                setErrorVisible={setErrorVisible}
+              />
               <div className="flex justify-between w-full">
                 <div className="flex">
                   <input type="checkbox" name="" id="" />
@@ -60,8 +64,8 @@ const Login: NextPage = () => {
                 <a href="http://">Esqueceu a senha?</a>
               </div>
               <button
-                className="transition ease-in-out delay-150 bg-blue-500 hover:translate-x-2 hover:scale-105 hover:bg-[#0013BE] duration-300
-                        bg-[#0119F5] self-start w-1/2 text-white py-2 px-4 rounded-full focus:outline-none focus:shadow-outline"
+                className="transition ease-in-out delay-150 bg-blue-500 hover:translate-x-2 hover:scale-105 hover:bg-[#4B42FF] duration-300
+                        bg-[#6c63ff] self-start w-1/2 text-white py-2 px-4 rounded-full focus:outline-none focus:shadow-outline"
                 type="submit"
               >
                 Entrar
