@@ -1,6 +1,5 @@
-import { Component, createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { parseCookies, setCookie } from "nookies";
-import axios from "axios";
 import Router from "next/router";
 import { getApi } from "../services/axios";
 
