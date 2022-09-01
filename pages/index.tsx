@@ -13,7 +13,6 @@ const Home: NextPage = () => {
     <div className="flex">
       <Menu />
       <Header />
-      <h1 className="text-3xl font-bold">ATIVADO: {usuario?.login}</h1>
     </div>
   );
 };
