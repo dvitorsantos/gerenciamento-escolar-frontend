@@ -58,7 +58,7 @@ function Search(props: any) {
           <Image src={closeIcon}></Image>
         </div>
       </div>
-      <div className="bg-[#F8F6F9] w-[408px] mt-4 shadow-md absolute">
+      <ul className="bg-[#F8F6F9] w-[408px] mt-4 shadow-md absolute h-50 overflow-auto">
         {filteredTelas.map((tela) => {
           return (
             <SearchOptions
@@ -68,7 +68,7 @@ function Search(props: any) {
             />
           );
         })}
-      </div>
+      </ul>
     </div>
   );
 }

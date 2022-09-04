@@ -7,10 +7,10 @@ function SearchOptions(props: any) {
   }
 
   return (
-    <div className="flex p-4 hover:bg-[#F2F2F2] hover:cursor-pointer w-100" onClick={() => redirect()}>
+    <li className="flex p-4 hover:bg-[#F2F2F2] hover:cursor-pointer w-100" onClick={() => redirect()}>
       <Image src={props.icone} width="25px" height="25px"></Image>
       <p className="ml-3">{props.descricao}</p>
-    </div>
+    </li>
   );
 }
 
