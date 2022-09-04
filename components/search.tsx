@@ -13,17 +13,17 @@ import SearchOptions from "./searchOptions";
 function Search(props: any) {
   const telas = [
     {
-      icone: addIcon,
+      numero: "123",
       descricao: "Cadastro",
       destination: "/cadastro",
     },
     {
-      icone: movimentationIcon,
+      numero: "321",
       descricao: "Movimentação",
       destination: "/movimentacao",
     },
     {
-      icone: paper,
+      numero: "213",
       descricao: "Relatório",
       destination: "/relatorio",
     },
@@ -43,26 +43,25 @@ function Search(props: any) {
 
   return (
     <div>
-      <div className="flex shadow-md h-12">
-        <div className="bg-[#F8F6F9] flex items-center justify-center w-12 cursor-pointer">
+      <div className="flex">
+        {/* <div className="bg-[#F8F6F9] flex items-center justify-center w-12 cursor-pointer">
           <Image src={searchIcon}></Image>
-        </div>
+        </div> */}
         <input
-          className="bg-[#F8F6F9] w-80 focus:outline-none"
-          type="text"
-          name="search"
-          id="search"
+          placeholder="Pesquisar"
+          className="w-full px-5 h-10 w-[408px] text-base text-neutral-500 placeholder-gray-400 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-100 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300"
           onChange={handleSearch}
-        />
-        <div className="bg-[#F8F6F9] flex items-center justify-center w-10 cursor-pointer">
+        ></input>
+
+        {/* <div className="bg-[#F8F6F9] flex items-center justify-center w-10 cursor-pointer">
           <Image src={closeIcon}></Image>
-        </div>
+        </div> */}
       </div>
-      <ul className="bg-[#F8F6F9] w-[408px] mt-4 shadow-md absolute h-50 overflow-auto">
+      <ul className="bg-indigo-700 rounded w-[408px] mt-4 shadow-md absolute h-50 overflow-auto">
         {filteredTelas.map((tela) => {
           return (
             <SearchOptions
-              icone={tela.icone}
+              numero={tela.numero}
               descricao={tela.descricao}
               destination={tela.destination}
             />
