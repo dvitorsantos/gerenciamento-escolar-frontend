@@ -44,20 +44,13 @@ function Search(props: any) {
   return (
     <div>
       <div className="flex">
-        {/* <div className="bg-[#F8F6F9] flex items-center justify-center w-12 cursor-pointer">
-          <Image src={searchIcon}></Image>
-        </div> */}
         <input
           placeholder="Pesquisar"
           className="w-full px-5 h-10 w-[408px] text-base text-neutral-500 placeholder-gray-400 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-100 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300"
           onChange={handleSearch}
         ></input>
-
-        {/* <div className="bg-[#F8F6F9] flex items-center justify-center w-10 cursor-pointer">
-          <Image src={closeIcon}></Image>
-        </div> */}
       </div>
-      <ul className="bg-indigo-700 rounded w-[408px] mt-4 shadow-md absolute h-50 overflow-auto">
+      <ul className="bg-indigo-700 rounded w-[408px] mt-4 shadow-md absolute h-50 overflow-auto z-50">
         {filteredTelas.map((tela) => {
           return (
             <SearchOptions
