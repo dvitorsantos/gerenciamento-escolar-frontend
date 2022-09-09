@@ -2,15 +2,26 @@ import type { NextPage } from "next";
 
 import MenuLateral from "../components/menu";
 import Header from "../components/header";
-import Image from "next/image";
 
-import userImg from "../images/logo.svg";
-import { useState } from "react";
+import { getApi } from "../services/axios";
+
+import { useForm } from "react-hook-form";
 
 const Cadastro: NextPage = () => {
-  const steps = ["Customer Info", "Shipping Info", "Payment", "Step 4"];
-  const [currentStep, setCurrentStep] = useState(1);
-  const [complete, setComplete] = useState(false);
+  const { register, handleSubmit } = useForm();
+  const api = getApi();
+
+  async function handleFormSubmit(data: any) {
+    console.log(data);
+    await api
+    .post("/alunos", data)
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      throw error;
+    });
+  }
 
   return (
     <div className="flex">
@@ -33,7 +44,7 @@ const Cadastro: NextPage = () => {
                         </p>
                       </div>
                     </div>
-                    <form action="#" method="POST">
+                    <form onSubmit={handleSubmit(handleFormSubmit)}>
                       <div className="overflow-hidden shadow sm:rounded-md">
                         <div className="bg-white px-4 py-5 sm:p-6">
                           <div className="grid grid-cols-6 gap-6">
@@ -61,134 +72,142 @@ const Cadastro: NextPage = () => {
                             </div>
                             <div className="col-span-6 sm:col-span-2">
                               <label
-                                htmlFor="first-name"
+                                htmlFor="nome"
                                 className="block text-sm font-medium text-gray-700"
                               >
                                 Nome
                               </label>
                               <input
+                                {...register("nome")}
                                 type="text"
-                                name="first-name"
-                                id="first-name"
+                                name="nome"
+                                id="nome"
                                 autoComplete="given-name"
-                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-3 py-2 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg focus:outline-none focus:border-transparent focus:ring-1"
+                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-3 py-2 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border rounded-lg focus:outline-none focus:border-transparent focus:ring-1"
                               />
                             </div>
 
                             <div className="col-span-6 sm:col-span-2">
                               <label
-                                htmlFor="last-name"
+                                htmlFor="sobrenome"
                                 className="block text-sm font-medium text-gray-700"
                               >
                                 Sobrenome
                               </label>
                               <input
+                                {...register("sobrenome")}
                                 type="text"
-                                name="last-name"
-                                id="last-name"
+                                name="sobrenome"
+                                id="sobrenome"
                                 autoComplete="family-name"
-                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm  px-3 py-2 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg focus:outline-none focus:border-transparent focus:ring-1"
+                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm  px-3 py-2 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border rounded-lg focus:outline-none focus:border-transparent focus:ring-1"
                               />
                             </div>
 
                             <div className="col-span-6 sm:col-span-2">
                               <label
-                                htmlFor="street-address"
+                                htmlFor="cpf"
                                 className="block text-sm font-medium text-gray-700"
                               >
                                 Cpf
                               </label>
                               <input
+                                {...register("cpf")}
                                 type="text"
                                 name="cpf"
                                 id="cpf"
                                 autoComplete="cpf"
                                 placeholder="000.000.000-00"
-                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm  px-3 py-2 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg focus:outline-none focus:border-transparent focus:ring-1"
+                                className=" mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm  px-3 py-2 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border rounded-lg focus:outline-none focus:border-transparent focus:ring-1"
                               />
                             </div>
 
                             <div className="col-span-6 sm:col-span-2">
                               <label
-                                htmlFor="street-address"
+                                htmlFor="telefone"
                                 className="block text-sm font-medium text-gray-700"
                               >
                                 Telefone/Celular
                               </label>
                               <input
+                                {...register("telefone")}
                                 type="text"
                                 name="telefone"
                                 id="telefone"
                                 autoComplete="phone"
                                 placeholder="(00) 00000-0000"
-                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm  px-3 py-2 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg focus:outline-none focus:border-transparent focus:ring-1"
+                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm  px-3 py-2 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border rounded-lg focus:outline-none focus:border-transparent focus:ring-1"
                               />
                             </div>
 
                             <div className="col-span-6 sm:col-span-2">
                               <label
-                                htmlFor="email-address"
+                                htmlFor="email"
                                 className="block text-sm font-medium text-gray-700"
                               >
                                 Email
                               </label>
                               <input
+                                {...register("email")}
                                 type="text"
-                                name="email-address"
-                                id="email-address"
+                                name="email"
+                                id="email"
                                 autoComplete="email"
-                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm  px-3 py-2 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg focus:outline-none focus:border-transparent focus:ring-1"
+                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm  px-3 py-2 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border rounded-lg focus:outline-none focus:border-transparent focus:ring-1"
                               />
                             </div>
 
                             <div className="col-span-6 sm:col-span-2">
                               <label
-                                htmlFor="country"
+                                htmlFor="cor"
                                 className="block text-sm font-medium text-gray-700"
                               >
                                 Cor
                               </label>
                               <select
-                                id="country"
-                                name="country"
-                                autoComplete="country-name"
+                                {...register("cor")}
+                                id="cor"
+                                name="cor"
+                                autoComplete="cor"
                                 className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm "
                               >
-                                <option>Branco</option>
-                                <option>Negro</option>
-                                <option>Pardo</option>
+                                <option value="branco">Branco</option>
+                                <option value="negro">Negro</option>
+                                <option value="pardo">Pardo</option>
                               </select>
                             </div>
 
                             <div className="col-span-6 sm:col-span-2">
                               <label
-                                htmlFor="country"
+                                htmlFor="sexo"
                                 className="block text-sm font-medium text-gray-700"
                               >
                                 Sexo
                               </label>
                               <select
-                                id="country"
-                                name="country"
-                                autoComplete="country-name"
+                                {...register("sexo")}
+                                id="sexo"
+                                name="sexo"
+                                autoComplete="sexo"
                                 className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm "
                               >
-                                <option>Masculino</option>
-                                <option>Feminino</option>
+                                <option value="M">Masculino</option>
+                                <option value="F">Feminino</option>
                               </select>
                             </div>
 
                             <div className="col-span-6 sm:col-span-2">
                               <label
-                                htmlFor="country"
+                                htmlFor="pais"
                                 className="block text-sm font-medium text-gray-700"
                               >
                                 País
                               </label>
                               <select
-                                id="country"
-                                name="country"
-                                autoComplete="country-name"
+                                {...register("pais")}
+                                id="pais"
+                                name="pais"
+                                autoComplete="country"
                                 className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm "
                               >
                                 <option>United States</option>
@@ -199,66 +218,70 @@ const Cadastro: NextPage = () => {
 
                             <div className="col-span-6 sm:col-span-2">
                               <label
-                                htmlFor="street-address"
+                                htmlFor="rua"
                                 className="block text-sm font-medium text-gray-700"
                               >
                                 Rua
                               </label>
                               <input
+                                {...register("rua")}
                                 type="text"
-                                name="street-address"
-                                id="street-address"
+                                name="rua"
+                                id="rua"
                                 autoComplete="street-address"
-                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm  px-3 py-2 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg focus:outline-none focus:border-transparent focus:ring-1"
+                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm  px-3 py-2 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border rounded-lg focus:outline-none focus:border-transparent focus:ring-1"
                               />
                             </div>
 
                             <div className="col-span-6 sm:col-span-3 lg:col-span-2">
                               <label
-                                htmlFor="region"
+                                htmlFor="estado"
                                 className="block text-sm font-medium text-gray-700"
                               >
                                 Estado
                               </label>
                               <input
+                                {...register("estado")}
                                 type="text"
-                                name="region"
-                                id="region"
+                                name="estado"
+                                id="estado"
                                 autoComplete="address-level1"
-                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm  px-3 py-2 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg focus:outline-none focus:border-transparent focus:ring-1"
+                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm  px-3 py-2 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border rounded-lg focus:outline-none focus:border-transparent focus:ring-1"
                               />
                             </div>
 
                             <div className="col-span-6 sm:col-span-6 lg:col-span-2">
                               <label
-                                htmlFor="city"
+                                htmlFor="cidade"
                                 className="block text-sm font-medium text-gray-700"
                               >
                                 Cidade
                               </label>
                               <input
+                                {...register("cidade")}
                                 type="text"
-                                name="city"
-                                id="city"
+                                name="cidade"
+                                id="cidade"
                                 autoComplete="address-level2"
-                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm  px-3 py-2 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg focus:outline-none focus:border-transparent focus:ring-1"
+                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm  px-3 py-2 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border rounded-lg focus:outline-none focus:border-transparent focus:ring-1"
                               />
                             </div>
 
                             <div className="col-span-6 sm:col-span-3 lg:col-span-2">
                               <label
-                                htmlFor="postal-code"
+                                htmlFor="cep"
                                 className="block text-sm font-medium text-gray-700"
                               >
                                 CEP
                               </label>
                               <input
+                                {...register("cep")}
                                 type="text"
                                 name="cep"
                                 id="cep"
                                 autoComplete="postal-code"
                                 placeholder="00000-00"
-                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm  px-3 py-2 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg focus:outline-none focus:border-transparent focus:ring-1"
+                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm  px-3 py-2 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform border rounded-lg focus:outline-none focus:border-transparent focus:ring-1"
                               />
                             </div>
                           </div>
