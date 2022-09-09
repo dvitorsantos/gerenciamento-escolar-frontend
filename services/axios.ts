@@ -1,7 +1,7 @@
 import axios from "axios";
 import { parseCookies } from "nookies";
 
-export function getApi(context: any) {
+export function getApi() {
     const { 'nextauth.token': token } = parseCookies();
 
     const api = axios.create({
@@ -9,7 +9,7 @@ export function getApi(context: any) {
     })
 
     if (token) {
-        api.defaults.headers['Authorization'] = `Bearer ${token}`;
+        api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     }
 
     return api;
