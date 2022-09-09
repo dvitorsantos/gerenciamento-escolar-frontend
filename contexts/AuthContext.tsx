@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import {createContext, ReactNode, useEffect, useState} from "react";
 import { parseCookies, setCookie } from "nookies";
 import Router from "next/router";
 import { getApi } from "../services/axios";
@@ -20,9 +20,13 @@ type AuthContextType = {
   signIn: (data: SignInData) => Promise<void>;
 };
 
+type AuthProviderProps = {
+    children: ReactNode;
+}
+
 export const AuthContext = createContext({} as AuthContextType);
 
-export function AuthProvider({ children }) {
+export function AuthProvider({ children }: AuthProviderProps) {
   const [usuario, setUsuario] = useState<Usuario | null>(null);
   const isAuthenticated = !!usuario;
   const api = getApi();
