@@ -64,7 +64,6 @@ function Header(props: any) {
     setFilteredTelas(
       telas.filter((tela) => tela.descricao.includes(event.target.value))
     );
-    console.log(filteredTelas);
   }
 
   return (

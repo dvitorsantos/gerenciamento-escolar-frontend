@@ -1,28 +1,14 @@
 import { useState } from "react";
-import Image from "next/image";
-import Router from "next/router";
 
 import MenuItem from "./menuItem";
-
-import logo from "../images/logo.svg";
-import addIcon from "../images/addIcon.png";
-import movimentationIcon from "../images/movimentationIcon.svg";
-import paper from "../images/paperIcon.svg";
 
 function Menu(props: any) {
   const [menus, setMenus] = useState([
     {
-      icone: addIcon,
-      descricao: "Cadastro",
-      destination: "/cadastro",
+      descricao: "Alunos",
+      destination: "/alunos",
     },
     {
-      icone: movimentationIcon,
-      descricao: "Movimentação",
-      destination: "/movimentacao",
-    },
-    {
-      icone: paper,
       descricao: "Relatório",
       destination: "/relatorio",
     },

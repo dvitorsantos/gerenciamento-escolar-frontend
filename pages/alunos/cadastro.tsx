@@ -1,9 +1,9 @@
 import type { NextPage } from "next";
 
-import MenuLateral from "../components/menu";
-import Header from "../components/header";
+import MenuLateral from "../../components/menu";
+import Header from "../../components/header";
 
-import { getApi } from "../services/axios";
+import { getApi } from "../../services/axios";
 
 import { useForm } from "react-hook-form";
 
