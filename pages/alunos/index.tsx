@@ -95,9 +95,9 @@ const Home: NextPage = () => {
                           <td className="py-4 px-6 text-gray-500">
                             {aluno.telefone}
                           </td>
-                          <td className="py-4 px-6 text-gray-500">
-                            <a href="#" className="font-medium text-indigo-700">
-                              Edit
+                          <td className="py-4 px-6 text-gray-500 cursor-pointer">
+                            <a onClick={() => {Router.push(`alunos/${aluno.id}`);}} className="font-medium text-indigo-700">
+                              Editar
                             </a>
                           </td>
                         </tr>
